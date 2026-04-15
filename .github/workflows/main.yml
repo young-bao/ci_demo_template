@@ -1,0 +1,20 @@
+name: "ci_demo"
+on: 
+  workflow_dispatch
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: checkout
+        run: echo checkout
+      - name: pull
+        run: echo pull && ll
+      - name: install
+        run: echo install
+      - name: build
+        run: echo build
+      - name: publish
+        run: echo publish
+
+  
+  
