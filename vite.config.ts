@@ -3,6 +3,6 @@ import vue from "@vitejs/plugin-vue";
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
-	base: mode === "production" ? "/vue3-ts-vite-starter/" : "/",
+	base: mode === "production" ? "/ci_demo" : "/",
 	plugins: [vue()],
 }));
