@@ -39,7 +39,7 @@ jobs:
 
       - name: Build
         env:
-          BASE_PATH: "/${{ env.REPO_NAME }}/"
+          BASE_PATH: "${{ env.REPO_NAME }}/"
         run: pnpm build
 
       - name: Display dist file
