@@ -1,5 +1,5 @@
 name: "ci_demo"
-on: workflow_dispatch
+on: push
 permissions: 
   contents: write
 jobs:
