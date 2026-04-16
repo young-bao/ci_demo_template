@@ -19,6 +19,8 @@ jobs:
         run: pnpm install
       - name: Build
         run: pnpm build
+      - name: Display dist file
+        run: ls -la && ls dist/
           
       # - name: pull
       #   run: echo pull && ls
