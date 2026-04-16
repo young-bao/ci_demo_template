@@ -4,13 +4,27 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-      - name: checkout
-        run: echo checkout
-      - name: pull
-        run: echo pull && ls
-      - name: install
-        run: echo install
-      - name: build
-        run: echo build
-      - name: publish
-        run: echo publish
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v6.3.0
+        with:
+          # Version Spec of the version to use. Examples: 12.x, 10.15.1, >=10.15.0.
+          node-version: 22.x
+          # Used to specify a package manager for caching in the default directory. Supported values: npm, yarn, pnpm.
+          cache: pnpm
+          # Used to specify the path to a dependency file: package-lock.json, yarn.lock, etc. Supports wildcards or a list of file names for caching multiple dependencies.
+          cache-dependency-path: pnpm-lock.yaml
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+      - name: Install
+        run: pnpm install
+      - name: Build
+        run: pnpm build
+          
+      # - name: pull
+      #   run: echo pull && ls
+      # - name: install
+      #   run: echo install
+      # - name: build
+      #   run: echo build
+      # - name: publish
+      #   run: echo publish
