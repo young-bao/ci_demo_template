@@ -13,6 +13,8 @@ jobs:
           cache: pnpm
           # Used to specify the path to a dependency file: package-lock.json, yarn.lock, etc. Supports wildcards or a list of file names for caching multiple dependencies.
           cache-dependency-path: pnpm-lock.yaml
+      - name: Install pnpm
+        run: npm install -g pnpm
       - name: Checkout
         uses: actions/checkout@v6.0.2
       - name: Install
