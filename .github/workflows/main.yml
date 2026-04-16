@@ -1,5 +1,5 @@
 name: "ci_demo"
-on: push
+on: [push, workflow_dispatch]
 # 设置 GITHUB_TOKEN 的权限，以允许部署到 GitHub Pages
 permissions:
   contents: read
@@ -34,7 +34,7 @@ jobs:
         run: pnpm install
       - name: Extract Repository Name
         id: extract_repo
-        run: echo "REPO_NAME=$(echo $GITHUB_REPOSITORY | cut -d'/' -f2)" >> $GITHUB_ENV
+        run: echo "REPO_NAME=$(echo $GITHUB_ACTION_REPOSITORY | cut -d'/' -f2)" >> $GITHUB_ENV
       - name: Build
         env:
           BASE_PATH: "/{{ env.REPO_NAME }}/"
