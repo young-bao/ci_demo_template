@@ -1,9 +1,21 @@
 name: "ci_demo"
 on: push
-permissions: 
-  contents: write
+# 设置 GITHUB_TOKEN 的权限，以允许部署到 GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 允许一个并发部署
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   build:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-22.04
     steps:
       - name: Setup Node.js environment
@@ -13,8 +25,8 @@ jobs:
           version: 10
       - uses: actions/setup-node@v6
         with:
-          node-version: '24'
-          cache: 'pnpm'
+          node-version: "24"
+          cache: "pnpm"
       - run: pnpm install
       - name: Checkout
         uses: actions/checkout@v6.0.2
@@ -26,14 +38,17 @@ jobs:
         run: ls -la && ls dist/
 
       - name: Deploy to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v5
-        with:
-          target_branch: gh-pages
-          build_dir: dist
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
-          
+        id: deployment
+        uses: actions/deploy-pages@v5
+
+      # - name: Deploy to GitHub Pages
+      #   uses: crazy-max/ghaction-github-pages@v5
+      #   with:
+      #     target_branch: gh-pages
+      #     build_dir: dist
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       # - name: pull
       #   run: echo pull && ls
       # - name: install
